@@ -2,9 +2,20 @@ use clap::Parser;
 use ini::Ini;
 use std::io;
 
+// TODO: update Readme
+// TODO: improve --help
+// TODO: add score counter
+// TODO: add replay answer
+// TODO: add default colors to output
+// TODO: add color attr to question in .ini
+// TODO: update Readme
+// TODO: add custom win message
+// TODO: add custom lose message
+// TODO: finish Readme
+
 #[derive(Parser, Debug)]
 struct Args {
-    /// Path to file with questions and answers
+    /// Path to .ini file with questions and answers
     path: String,
 }
 
