@@ -2,7 +2,6 @@ use clap::Parser;
 use ini::Ini;
 use std::io;
 
-// TODO: update Readme
 // TODO: improve --help
 // TODO: add score counter
 // TODO: add replay answer
