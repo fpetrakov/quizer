@@ -3,7 +3,6 @@ use ini::Ini;
 use std::io;
 
 // TODO: add score counter
-// TODO: add replay answer
 // TODO: add default colors to output
 // TODO: add color attr to question in .ini
 // TODO: update Readme
@@ -35,23 +34,34 @@ fn main() {
 
     let conf = Ini::load_from_file(args.path).unwrap();
 
-    for (sec, _) in &conf {
-        let section_name = sec.unwrap();
-        let section = conf.section(Some(section_name)).unwrap();
-        let question = section.get("Question").unwrap();
-        let right_answer = section.get("Answer").unwrap().to_lowercase();
+    loop {
+        for (sec, _) in &conf {
+            let section_name = sec.unwrap();
+            let section = conf.section(Some(section_name)).unwrap();
+            let question = section.get("Question").unwrap();
+            let right_answer = section.get("Answer").unwrap().to_lowercase();
 
-        println!("Question {:?}:", section_name);
-        println!("{:?}", question);
+            println!("Question {:?}:", section_name);
+            println!("{:?}", question);
 
+            let mut user_answer = String::new();
+            io::stdin().read_line(&mut user_answer).unwrap();
+            let user_answer = user_answer.trim_end().to_lowercase();
+
+            if user_answer == right_answer {
+                println!("You are absolutely right!")
+            } else {
+                println!("Unfortunately, you are wrong!");
+            }
+        }
+
+        println!("Would you like to play again? If so type 'y' ");
         let mut user_answer = String::new();
         io::stdin().read_line(&mut user_answer).unwrap();
-        let user_answer = user_answer.trim_end().to_lowercase();
-
-        if user_answer == right_answer {
-            println!("You are absolutely right!")
+        if user_answer.trim_end() == "y" {
+            continue;
         } else {
-            println!("Unfortunately, you are wrong!");
+            break;
         }
     }
 }
