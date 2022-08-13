@@ -11,7 +11,7 @@ chmod +x /path/to/binary/quizer
 
 ## Usage
 
-1. Create questions.ini file with questions, for example:
+1. Create .ini file with questions and answers, for example:
 ```console
 [1]
 Question="What is my favorite color?"
@@ -21,7 +21,7 @@ Answer="Red"
 Question="What is my name?"
 Answer="Fedya"
 ```
-2. Run quizer and pass path to questions.ini file
+2. Run quizer and pass path to .ini file
 ```console
 quizer /path/to/questions.ini
 ```

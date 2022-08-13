@@ -2,7 +2,6 @@ use clap::Parser;
 use ini::Ini;
 use std::io;
 
-// TODO: improve --help
 // TODO: add score counter
 // TODO: add replay answer
 // TODO: add default colors to output
@@ -11,8 +10,21 @@ use std::io;
 // TODO: add custom win message
 // TODO: add custom lose message
 // TODO: finish Readme
+const LONG_ABOUT: &str = "
+To run quizer create .ini file with questions and answers, for example:
 
+[1]
+Question='What is my favorite color?'
+Answer='Red'
+
+[2]
+Question='What is my name?'
+Answer='Fedya'
+";
+
+/// Rust app that creates cli quiz for you!
 #[derive(Parser, Debug)]
+#[clap(author, version, about, long_about = LONG_ABOUT)]
 struct Args {
     /// Path to .ini file with questions and answers
     path: String,
