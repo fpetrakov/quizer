@@ -1,13 +1,14 @@
 use clap::Parser;
+use colored::Colorize;
 use ini::Ini;
 use std::io;
 
-// TODO: add default colors to output
 // TODO: add color attr to question in .ini
 // TODO: update Readme
 // TODO: add custom win message
 // TODO: add custom lose message
 // TODO: finish Readme
+
 const LONG_ABOUT: &str = "
 To run quizer create .ini file with questions and answers, for example:
 
@@ -42,27 +43,32 @@ fn main() {
             let question = section.get("Question").unwrap();
             let right_answer = section.get("Answer").unwrap().to_lowercase();
 
-            println!("Question {:?}:", section_name);
-            println!("{:?}", question);
+            println!("{}", format!("Question {:?}:", section_name).cyan());
+            println!("{}", format!("{:?}", question).blue());
 
             let user_answer = get_user_answer();
 
             if user_answer == right_answer {
-                println!("You are absolutely right!");
+                println!("{}", format!("You are absolutely right!").bright_green());
                 current_score += 1;
             } else {
-                println!("Unfortunately, you are wrong!");
+                println!("{}", format!("Unfortunately, you are wrong!").red());
             }
         }
 
         println!(
-            "You managed to answer {} out of {} questions",
-            current_score, max_score
+            "{}",
+            format!(
+                "You managed to answer {} out of {} questions",
+                current_score, max_score
+            )
+            .purple()
         );
 
-        println!("Would you like to play again? If so type 'y' ");
+        println!("{}", format!("Type 'y' to play again").blue());
         let user_answer = get_user_answer();
         if user_answer == "y" {
+            current_score = 0;
             continue;
         } else {
             break;
