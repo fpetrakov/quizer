@@ -2,7 +2,6 @@ use clap::Parser;
 use ini::Ini;
 use std::io;
 
-// TODO: add score counter
 // TODO: add default colors to output
 // TODO: add color attr to question in .ini
 // TODO: update Readme
@@ -31,8 +30,10 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-
     let conf = Ini::load_from_file(args.path).unwrap();
+
+    let max_score = conf.sections().count();
+    let mut current_score = 0;
 
     loop {
         for (sec, _) in &conf {
@@ -47,16 +48,20 @@ fn main() {
             let user_answer = get_user_answer();
 
             if user_answer == right_answer {
-                println!("You are absolutely right!")
+                println!("You are absolutely right!");
+                current_score += 1;
             } else {
                 println!("Unfortunately, you are wrong!");
             }
         }
 
+        println!(
+            "You managed to answer {} out of {} questions",
+            current_score, max_score
+        );
+
         println!("Would you like to play again? If so type 'y' ");
-
         let user_answer = get_user_answer();
-
         if user_answer == "y" {
             continue;
         } else {
