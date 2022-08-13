@@ -44,9 +44,7 @@ fn main() {
             println!("Question {:?}:", section_name);
             println!("{:?}", question);
 
-            let mut user_answer = String::new();
-            io::stdin().read_line(&mut user_answer).unwrap();
-            let user_answer = user_answer.trim_end().to_lowercase();
+            let user_answer = get_user_answer();
 
             if user_answer == right_answer {
                 println!("You are absolutely right!")
@@ -56,12 +54,19 @@ fn main() {
         }
 
         println!("Would you like to play again? If so type 'y' ");
-        let mut user_answer = String::new();
-        io::stdin().read_line(&mut user_answer).unwrap();
-        if user_answer.trim_end() == "y" {
+
+        let user_answer = get_user_answer();
+
+        if user_answer == "y" {
             continue;
         } else {
             break;
         }
     }
+}
+
+fn get_user_answer() -> String {
+    let mut user_answer = String::new();
+    io::stdin().read_line(&mut user_answer).unwrap();
+    user_answer.trim_end().to_lowercase()
 }
